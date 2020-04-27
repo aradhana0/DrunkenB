@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="author" content="Aradhana Dubey">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="./manifest.json">
+    <style type="text/css">
+        html, body {
+            /*height: 100%;*/
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            /*background: linear-gradient(to bottom, rgba(17, 15, 12, 0.52), rgba(65, 65, 65, 0.73));*/
+        }
+
+        body {
+            padding: 0px;
+            margin: 0px;
+            color: #ffffff;
+            font-family: "fantasy";
+            height: 100%;
+
+        }
+
+        .start-button {
+            color: #000000;
+            padding: 10px 20px;
+            font-size: 25px;
+            font-family: fantasy;
+            margin: auto;
+            font-weight: bold;
+            border-radius: 5px;
+            box-shadow: 5px 4px 8px darkslategrey;
+            border: 1px solid whitesmoke;
+            margin-bottom: 20px;
+        }
+
+        #thegame {
+            display: none;
+        }
+
+        #start {
+            height: auto !important;
+            text-align: center;
+            margin-top: 0%
+        }
+
+        #app-title {
+            font-size: 30px;
+            margin-bottom: 30px;
+            /*font-weight: bold;*/
+            font-family: "Comic Sans MS";
+            text-shadow: 0 1px 0 #ccc,
+            0 2px 0 #c9c9c9,
+            0 3px 0 #bbb,
+            0 4px 0 #b9b9b9,
+            0 5px 0 #aaa,
+            0 6px 1px rgba(0, 0, 0, .1),
+            0 0 5px rgba(0, 0, 0, .1),
+            0 1px 3px rgba(0, 0, 0, .3),
+            0 3px 5px rgba(0, 0, 0, .2),
+            0 5px 10px rgba(0, 0, 0, .25),
+            0 10px 10px rgba(0, 0, 0, .2),
+            0 20px 20px rgba(0, 0, 0, .15);
+        }
+
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            box-shadow: 10px 10px 10px lightgrey;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            /*height: 400px;*/
+            border: 1px solid #888;
+            width: 460px;
+            color: #ffffff;
+            box-shadow: 2px 5px 17px #191717;
+            background: linear-gradient(to bottom, rgba(17, 15, 12, 0.52), rgba(65, 65, 65, 0.73)), url("./images/a-b-modal.gif");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            text-align: center;
+            border-radius: 15px;
+            font-size: 23px;
+            font-family: Chalkboard;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #110f0c;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .game-over-text {
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 50px;
+            margin-top: 50px;
+            font-family: Chalkduster, cursive;
+        }
+
+        #refer {
+            /*text-align: left !important;*/
+            /*margin: 40px 0;*/
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 15px;
+            border-radius: 5px;
+            min-width: 150px;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            box-shadow: 10px 10px 10px dimgrey;
+        }
+
+        .btn-share {
+            background-color: #b6c9d047;
+            color: white;
+        }
+
+        .btn-restart {
+            border: 1px solid #03A9F4;
+            background-color: #e0f7fa;
+        }
+
+        .add-button {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+        }
+
+        .bottom-center {
+            width: 200px;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        @media only screen and (min-height: 700px) {
+            html {
+                height: 100%;
+            }
+            #container {
+                height: 100%;
+            }
+        }
+        @media only screen and (min-width: 768px) {
+            #container {
+                height: 100%;
+            }
+            html {
+                height: 100%;
+            }
+
+            body {
+                /*background: url("./images/angry-bird-back.png");*/
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+
+        @media only screen and (min-height: 800px) {
+            html {
+                height: 100%;
+            }
+
+            #container {
+                height: 100%;
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+
+            body {
+                /*background: url("./images/angry-bird-back-mobile.png");*/
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+
+            .modal-content {
+                margin: auto;
+                width: 260px;
+            }
+
+            .hide-in-mob {
+                display: none;
+            }
+        }
+
+        @media only screen and (max-width: 320px) {
+
+            .modal-content {
+                margin: auto;
+                width: 80%;
+            }
+
+            .game-over-text {
+                font-size: 40px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                margin-top: 20px;
+                font-family: Chalkduster, cursive;
+            }
+        }
+
+
+    </style>
+    <script src="./phaser.min.js"></script>
+    <script src="./js/game.js"></script>
+    <!--    <script src="./js/app.js"></script>-->
+</head>
+<body>
+<div id="container" style="background: linear-gradient(to bottom, rgba(17, 15, 12, 0.52), rgba(65, 65, 65, 0.73));">
+
+    <div id="start">
+        <div>
+
+            <div id="app-title">
+                <img src="./images/angry-birds-little.png" class="bottom-center"><br/>
+                <span style="color: black">D</span>
+                <span style="color: #273ff1">R</span>
+                <span style="color: #ff6071">U</span>
+                <span style="color: #6dd9dd">N</span>
+                <span style="color: #49baf1">K</span>
+                <span style="color: #8ff1bf">E</span>
+                <span style="color: #f5eda5">N </span><br/>
+                <span style="color: #110f0c; font-family: Chalkduster,cursive;font-size: 60px">B</span>
+            </div>
+        </div>
+        <div>
+            <button class="btn start-button" id="game-start-button" onclick="startGame('b')">Beginner</button>
+        </div>
+        <div>
+            <button class="btn start-button" id="game-start-button" onclick="startGame('a')">Average</button>
+        </div>
+        <div>
+            <button class="btn start-button" id="game-start-button" onclick="startGame('e')">Expert</button>
+        </div>
+        <div>
+            <img src="./images/eagle.png" class="bottom-center">
+            <img src="./images/a-b-group.png" class="bottom-center hide-in-mob">
+        </div>
+
+
+        <div style="padding: 5px 10px 20px;font-size: 10px">@NiYO, We provide more than just Banking</div>
+    </div>
+    <!--<button class="add-button">Add to home screen</button>-->
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="game-over-text">GAME OVER</div>
+            </div>
+            <div class="modal-body">
+                <!--            <span class="close" onclick="closeModal()">&times;</span>-->
+                <div>
+                    Score: <span id="score"> </span><br/>
+                    Max Score: <span id="max_score"> </span>
+                </div>
+                <div style="text-align: center">
+                    <button type="button" id="level" class="btn btn-level" onclick="changeLevel()">Change Level</button>
+                </div>
+                <div style="text-align: center">
+                    <button type="button" id="restart" class="btn btn-restart">Restart</button>
+                </div>
+                <div id="refer">
+                    <button type="button" class="btn btn-share" onclick="share()">Share with friends</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <audio id="start-music" src="./assets/sound/AngryBirdsThemeSong.mp3" type="audio/mp3" autoplay loop preload="true"></audio>
+    <audio id="background">
+        <source src="./assets/sound/AngryBirdstheme.mp3" type="audio/mp3">
+        <!--    <source src="./assets/sound/AngryBirdsThemeSong.mp3" type="audio/mp3">-->
+    </audio>
+    <audio id="bird-dead">
+        <source src="./assets/sound/explosion.mp3" type="audio/mp3">
+    </audio>
+    <audio id="game-over">
+        <source src="./assets/sound/game-over-sound-effect.mp3" type="audio/mp3">
+    </audio>
+
+    <div id="thegame">
+    </div>
+</div>
+</body>
+</html>
